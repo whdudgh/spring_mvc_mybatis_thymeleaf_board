@@ -1,0 +1,65 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.2'
+	id 'io.spring.dependency-management' version '1.1.2'
+}
+
+group = 'com.ezen'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	
+	 // 테스트를 위한 JUnit5 라이브러리
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    
+    // 테스트에서 코드체인을 위한 AssertJ 라이브러리
+	testImplementation 'org.assertj:assertj-core:3.22.0'
+	
+	
+	//==============Logback사용하기 위한 라이브러리들===========================================
+	// Slf4j(로깅 표준 인터페이스) 라이브러리
+	implementation 'org.slf4j:slf4j-api:2.0.6'
+	// Logback 라이브러리 (Slf4j 구현체)
+	implementation 'ch.qos.logback:logback-classic:1.4.5'
+	testImplementation 'ch.qos.logback:logback-classic:1.4.5'
+	//==========================================================================================
+	
+	// Lombok 라이브러리(어노테이션만 가지고있는 라이브러리 컴파일시만 적용)
+	compileOnly 'org.projectlombok:lombok:1.18.28'
+	
+	//jsp 엔진
+//	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
+//	runtimeOnly 'org.glassfish.web:jakarta.servlet.jsp.jstl'
+//	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+	// Thymeleaf사용하기 위해 등록
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	
+	// 오라클 JDBC 8버전
+	implementation 'com.oracle.database.jdbc:ojdbc8:21.9.0.0'
+	
+	// 스프링 Mybatis
+//	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
+	
+	//Spring MVC 모듈(스프링컨테이너 + Spring MVC)
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	// Jackson 라이브러리
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
+	
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

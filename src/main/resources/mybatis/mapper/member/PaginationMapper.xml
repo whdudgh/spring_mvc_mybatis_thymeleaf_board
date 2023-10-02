@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="com.ezen.springmvc.domain.common.web.mapper.PaginationMapper">
+
+	<!-- 게시판 전체 게시글 갯수 -->
+	<select id="findAllCount" parameterType="int" resultType="int">
+		SELECT count(article_id) totalArticle
+		FROM article
+		WHERE level_no = 0 AND board_id = #{boardId}
+	</select>
+
+	<!-- 검색된 게시글 갯수 -->
+	<select id="findSearchCount" parameterType="String" resultType="int">
+		SELECT COUNT(article_id) totalArticle
+		FROM article
+		WHERE writer = '%' || #{searchValue} || '%'
+			  OR subject LIKE '%' || #{searchValue} || '%'
+			  OR content LIKE '%' || #{searchValue} || '%'
+		<!-- 어떤게시판에서 검색할지 추가하려면 써도 됨.
+		<if test="type != null">
+			<choose>
+				<when test="type == 'id'">
+					WHERE board_id = #{boardId}
+				</when>
+				<when test="type == 'name'">
+					WHERE writer = '%' || #{value} || '%'
+					OR subject LIKE '%' || #{value} || '%'
+					OR content LIKE '%' || #{value} || '%'
+				</when>
+			</choose>
+		</if>
+		 -->
+	</select>
+	
+	<!-- 페이징 처리를 위한 글 정보 출력 -->
+	<select id="findSearchPage" parameterType="String" resultType="ArticleDTO">
+		SELECT article_id "articleId",
+			   subject, 
+      		   writer, 
+        	   regdate, 
+        	   hitcount
+		FROM article
+		WHERE writer = '%' || #{searchValue} || '%'
+			  OR subject LIKE '%' || #{searchValue} || '%'
+			  OR content LIKE '%' || #{searchValue} || '%'
+		<!-- 어떤게시판에서 검색할지 추가하려면 써도 됨.
+		<if test="type != null">
+			<choose>
+				 <when test="type == 'id'">
+					WHERE board_id = #{boardId}
+				</when>
+				<when test="type == 'name'">
+					WHERE writer = '%' || #{value} || '%'
+					OR subject LIKE '%' || #{value} || '%'
+					OR content LIKE '%' || #{value} || '%'
+				</when>
+			</choose>
+		</if>
+		-->
+	</select>
+	
+	<!-- 전체 목록 불러오기 -->
+	<select id="finAllArticle" parameterType="String" resultType="ArticleDTO">
+		SELECT article_id "articleId",
+			   subject, 
+      		   writer, 
+        	   regdate, 
+        	   hitcount
+		FROM article
+		WHERE level_no = 0
+		ORDER BY article_id DESC
+	</select>
+	
+	<!-- 계층형 게시판 및 페이징 처리를 위한 게시글목록 출력 -->
+	<select id="findSearchArticle" resultType="ArticleDTO">
+		SELECT subject, 
+     	  	   writer, 
+      	  	   regdate, 
+        	   hitcount,
+        	   group_no,
+        	   level_no
+		FROM   (SELECT CEIL(rownum / #{pageParams.elementSize}) requestPage, 
+               subject, 
+               writer, 
+               TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI') regdate, 
+               hitcount,
+               group_no,
+               level_no
+            FROM   (SELECT subject, 
+                           writer, 
+                           regdate, 
+                           hitcount,
+                           group_no,
+                           level_no
+                    FROM   article 
+                    WHERE  board_id = #{boardId} AND level_no = 0
+                    ORDER  BY group_no DESC, 
+                              order_no ASC)) 
+		WHERE  requestPage = #{pageParams.requestPage}
+	</select>
+	
+</mapper>

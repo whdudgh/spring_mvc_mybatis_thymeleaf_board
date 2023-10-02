@@ -1,0 +1,79 @@
+/*body 초기화*/
+body{
+  margin: 0 auto;
+  padding: 0;
+}
+/*-------------log in(로그인) 섹션 스타일링 시작-----------------------------------------------------------------*/
+/*로그인 회원가입 섹션배경*/
+.login-section, .signIn-section ,.comment-section{
+  background-color:  #6699cc;
+}
+/*섹션구역크기*/
+.login-section, .signIn-section , .comment-section{
+  height: 100vh;
+  /* min-height: 700px; */
+  min-height: 841.33px;
+  display: flex;
+  align-items: center;
+}
+/*h1스타일링*/
+.login-section h1, .signIn-section h1 {
+  color: #006699;
+  margin: 40px 0 40px 0;
+}
+/*컨테이너 스타일링*/
+.container{
+background-color: #fff;
+/* border-radius: 50px; */
+contain: content;
+text-align: center;
+box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+/*이미지 스타일링*/
+img {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+/*input타입 정렬 및 가로사이즈 조정*/
+input{
+  max-width: 60%;
+  /* display: flex; */
+  margin: 0 auto;
+  margin-bottom: 5%;
+}
+/*placeholder속성의 색상연하게변경*/
+input::placeholder {
+  color: rgba(81, 73, 73, 0.443) !important;
+}
+/*submit버튼의 가로값 설정*/
+#login, #signIn {
+  width: 60%;
+  /* color: #fff !important; */
+}
+/*버튼사이의 중간선*/
+.line {
+  align-items: center;
+  border-bottom: 1px solid #dadde1;
+  display: flex;
+  margin: 20px 16px;
+  text-align: center;
+}
+/*--------여기부터 sign in(회원가입) 섹션 스타일링-----------------------------------------------------------*/
+#uid{
+  max-width: 36%; 
+  display: inline;
+  
+}
+/*---------여기부터 코멘트섹션 comment-section 스타일링------------------------------------------------------*/
+.comment-section .container{
+  background-color: #fff;
+  /* border-radius: 50px; */
+  contain: content;
+  text-align: center;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  max-width: 90%;
+  max-height: 90%;
+}

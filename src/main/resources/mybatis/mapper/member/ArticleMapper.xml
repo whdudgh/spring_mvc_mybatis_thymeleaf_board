@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 인터페이스이름과 풀패키지명 설정-->
+<mapper namespace="com.ezen.springmvc.domain.board.mapper.ArticleMapper">
+	
+	<!-- 테이블 컬럼명과 DTO클래스 일치화작업 영호(2023-08-09) -->
+	<!--
+	<resultMap  id="articleDTO" type="com.ezen.mybatis.domain.article.dto.ArticleDTO">
+		<result property="articleId"     column="article_id"/>
+		<result property="boardId"       column="board_id"/>
+		<result property="writer"        column="writer"/>
+		<result property="subject"       column="subject"/>
+		<result property="content"       column="content"/>
+		<result property="regdate"       column="regdate"/>
+		<result property="hitcount"      column="hitcount"/>
+		<result property="passwd"        column="passwd"/>
+		<result property="groupNo"       column="group_no"/>
+		<result property="levelNo"       column="level_no"/>
+		<result property="orderNo"       column="order_no"/>
+	</resultMap>
+	 -->
+	
+	<!-- 테스트 전체목록 가져오기(페이징처리X) 재헌(2023-08-09) -->
+	<select id="findAll" resultType="ArticleDTO">
+		SELECT article_id id,
+			   subject,
+			   writer,
+			   regdate,
+			   hitcount,
+			   group_no,
+			   level_no,
+			   order_no
+		FROM   article
+		WHERE  board_id = 10
+		ORDER BY group_no DESC, order_no ASC
+	</select>
+	
+		<!-- 게시글 상세보기 영호(2023-08-09) -->
+	<select id="readArticle" parameterType="int" resultType="ArticleDTO">
+		SELECT subject,
+			   content, 
+			   regdate, 
+			   level_no,
+			   order_no,
+			   writer,
+			   hitcount,
+			   article_id
+		FROM article
+		WHERE group_no=#{groupNo}
+		ORDER BY order_no
+	</select>
+	
+	<!-- 게시글 등록 재헌(2023-08-09)-->
+	<insert id="create" parameterType="ArticleDTO">
+		INSERT INTO article (
+				article_id,
+				board_id,
+				writer,
+				subject,
+				content,
+				passwd,
+				group_no,
+				level_no,
+				order_no)
+		VALUES (
+				article_id_seq.NEXTVAL,
+				#{boardId},
+				#{writer},
+				#{subject},
+				#{content},
+				#{passwd},
+				article_id_seq.CURRVAL,
+				#{levelNo},
+				#{orderNo})
+	</insert>
+	
+	<!-- 게시글 댓글 등록 재헌(2023-08-09) -->
+	<insert id="commentCreate" parameterType="ArticleDTO">
+		INSERT INTO article(
+				article_id,
+				board_id,
+				writer,
+				subject,
+				content,
+				passwd,
+				group_no,
+				level_no,
+				order_no)
+		VALUES (article_id_seq.NEXTVAL,
+				#{boardId},
+				#{writer},
+				#{subject},
+				#{content},
+				#{passwd},
+				#{groupNo},
+				#{levelNo} + 1,
+				(SELECT MAX(order_no) + 1
+				FROM article
+				WHERE board_id = #{boardId}
+				AND group_no = #{groupNo}))
+	</insert>
+	
+	<!-- 대댓글 달기 전 들어가는 자리 이상의 order_no를 증가시키는 쿼리 -->
+	<update id="updatePlusOrderNo">
+		UPDATE article 
+		SET    order_no = order_no + 1 
+		WHERE  board_id = #{boardId} 
+       	AND group_no = 1 
+       	AND order_no > (SELECT order_no 
+                       FROM   article 
+                       WHERE  article_id = #{articleId})
+	</update>
+	
+	<!-- 대댓글 달기 영호(2023-08-09)-->
+	<insert id="setRReply" parameterType="ArticleDTO">
+		INSERT INTO article
+            (article_id,
+             board_id,
+             writer,
+             subject,
+             content,
+             passwd,
+             group_no,
+             level_no,
+             order_no)
+		VALUES      (
+             article_id_seq.NEXTVAL,
+             #{boardId},
+             #{writer},
+             #{subject},
+             #{content},
+             #{passwd},
+             #{groupNo},
+             2,
+             (SELECT order_no + 1
+              FROM   article
+              WHERE  article_id = #{articleId}))
+	</insert>
+	
+	<!-- 선택된 아티클 삭제 영호(2023-08-09) -->
+	<delete id="deleteArticle">
+		DELETE
+  		FROM article
+ 		WHERE
+  		<if test="levelNo != null">
+         <choose>
+            <when test="levelNo == 0">
+			   group_no = #{groupNo}
+            </when>
+            <otherwise>
+               passwd = #{passwd} AND article_Id = #{articleId}    
+            </otherwise>
+         </choose>
+      </if>
+	</delete>
+	
+</mapper>

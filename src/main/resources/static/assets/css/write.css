@@ -1,0 +1,111 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.post-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.post-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.post-form input,
+.post-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.post-form button {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.post-form button:hover {
+  background-color: #0056b3;
+}
+
+.text-options {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.options-box {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.option-button {
+  background-color: transparent;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.option-button.active {
+  color: #007bff;
+  background-color: #f5f5f5;
+}
+
+#content {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: font-weight 0.3s, text-align 0.3s, font-size 0.3s, text-decoration 0.3s, list-style-type 0.3s;
+  font-size: 14px;
+  text-align: left;
+}
+
+.custom-textarea {
+  position: relative;
+  width: 100%;
+  height: 300px; /* 원하는 높이 설정 */
+}
+
+#writecontent {
+  width: 100%;
+  height: 100%;
+  border: none; /* 내장 라인 제거 */
+  padding: 10px; /* 내용과 테두리 간격 */
+  resize: none; /* 크기 조절 불가능 */
+
+  vertical-align: top;
+}
+
+.line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10px; /* 라인 높이 설정 */
+  background-color: #5882FA; /* 라인 색상 설정 */
+} 

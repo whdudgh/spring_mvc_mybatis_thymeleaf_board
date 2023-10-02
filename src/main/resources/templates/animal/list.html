@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{layout/layout :: setContent(~{this :: link}, ~{this :: content})}">
+
+	<th:block th:fragment="link">
+		<link rel="stylesheet" href="/assets/css/list.css">
+	</th:block>
+
+
+	<th:block th:fragment="content">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<select class="form-select form-select-sm"
+						aria-label="Small select example">
+						<option selected>선택</option>
+						<option value="1">최신순</option>
+						<option value="2">인기순</option>
+					</select>
+				</div>
+
+				<!--=================버튼==================-->
+				<div class="col">
+					<div class="field is-grouped justify-content-end">
+						<p class="control">
+							<input class="input" type="text" placeholder="게시글을 검색해보세요.">
+						</p>
+						<p class="control">
+							<a class="button is-info"> Search </a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<br>
+
+
+			<!--================게시판===============-->
+			<div class="container">
+				<div class="col">
+					<table class="table">
+						<thead class="table-light">
+							<tr>
+								<th scope="col">품종</th>
+								<th scope="col">이름</th>
+								<th scope="col">나이</th>
+								<th scope="col">소개URL</th>
+								<th scope="col">견종</th>
+								<th scope="col">구조일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr >
+								<td>1</td>
+								<td><a href="#" style="color:black;">첫번째 게시물</a></td>
+								<td>Otto</td>
+								<td>
+									<p class="info-content">
+										<a> <i class="mdi mdi-eye-outline"></i> <small >100k</small>
+										</a>
+									</p>
+								</td>
+								<td>
+									<p class="info-content"></p> <a> <i
+										class="mdi mdi-comment-text-multiple-outline"></i> <small>70</small>
+								</a>
+								</td>
+								<td >2023년 8월 16일</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!--=================버튼==================-->
+
+		
+
+	</th:block>
+
+</th:block>
+
+
+
+</html>

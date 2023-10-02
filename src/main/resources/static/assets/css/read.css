@@ -1,0 +1,150 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+#writecontent{
+  width: 100%;
+  height: 10em;
+  border: none; /* 내장 라인 제거 */
+  padding: 10px;
+}
+
+.comments {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment {
+  margin-bottom: 15px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  position: relative;
+}
+
+.user {
+  font-weight: bold;
+  color: #333;
+}
+
+.message {
+  margin-top: 5px;
+  color: #666;
+}
+
+.comment-form {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.comment-form h3 {
+  margin: 0 0 10px;
+}
+
+.comment-form input[type="text"],
+.comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+
+.reply {
+  margin-top: 10px;
+  padding: 10px;
+  height: 140px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  margin-left: 30px;
+}
+
+.reply .user {
+  font-weight: bold;
+  color: #555;
+}
+
+.reply-form-box {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+}
+
+.date {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+  float: right;;
+  top: 0;
+  right: 0;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
+  margin-bottom: 0.5em !important;
+  margin-right: 0.5em;
+}
+
+
+.buttons-reply{
+  float: right;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid #ccc;
+  margin-left: 20px; /* 조정 가능 */
+}
+
+
+.comment-container {
+  margin-bottom: 20px !important;
+}
+
+.comment {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.message {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+.collapse {
+  margin-top: 10px;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.commentt{
+  width: 95%;
+}
+
+.card{
+  width: 95%;
+}

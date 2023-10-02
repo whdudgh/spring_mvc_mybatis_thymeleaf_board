@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block
+	th:replace="~{layout/layout :: setContent(~{this :: link}, ~{this :: content})}">
+
+	<th:block th:fragment="link">
+		<link rel="stylesheet" href="/assets/css/write.css">
+	</th:block>
+
+
+	<th:block th:fragment="content">
+		<form action="/article/newarticle" method="post">
+		<div class="container">
+    <div class="row">
+      <div class="box" style="height: 50em;">
+        <div class="col">
+          <div class="title-w">
+            <input class="input" type="text" name="subject" style="width:80%; margin-right:4.5%;" placeholder="제목을 넣어주세요.">
+            <input class="input" type="password" name="passwd" style="width:15%;" placeholder="비밀번호 입력칸">
+          </div>
+          <br>
+        </div>
+
+          <div id="choice">
+            <div class="col">
+              <div class="box">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="boardId" id="inlineRadio1" value="10">
+                  <label class="form-check-label" for="inlineRadio1">자유게시판</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="boardId" id="inlineRadio2" value="20">
+                  <label class="form-check-label" for="inlineRadio2">만땅게시판</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="boardId" id="inlineRadio3" value="30">
+                  <label class="form-check-label" for="inlineRadio3">묻고답하기</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="boardId" id="inlineRadio4" value="40">
+                  <label class="form-check-label" for="inlineRadio4">공지사항</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+
+
+
+        <table>
+          <tr class="text-options">
+            <div class="options-box">
+              <button class="option-button align-left" type="button" onclick="toggleAlign('left')">L</button>
+              <button class="option-button align-center" type="button" onclick="toggleAlign('center')">C</button>
+              <button class="option-button align-right" type="button" onclick="toggleAlign('right')">R</button>
+              <button class="option-button font-size-decrease" type="button" onclick="changeFontSize(-2)">A-</button>
+              <button class="option-button font-size-increase" type="button" onclick="changeFontSize(2)">A+</button>
+              <button class="option-button underline" type="button" onclick="toggleUnderline()">U</button>
+              <button class="option-button list-bullet" type="button" onclick="toggleList('ul')">•</button>
+              <button class="option-button list-number" type="button" onclick="toggleList('ol')">1.</button>
+              <button class="option-button strike-through" type="button" onclick="toggleStrikeThrough()">S</button>
+
+            </div>
+          </tr>
+
+          <tr>
+            <div class="custom-textarea" style="height: 70%;">
+              <textarea class="box" id="writecontent" name="content" placeholder="내용을 입력하세요"></textarea>
+            </div>
+            <br>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+  <br>
+
+  <!--===========버튼============-->
+
+  <div class="col">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+      <button class="btn btn-primary me-md-2" type="submit">등록하기</button>
+    </div>
+  </div>
+  </div>
+  <br>
+</form>
+  
+	</th:block>
+
+</th:block>
+
+
+
+</html>
